@@ -57,9 +57,7 @@ const Single = () => {
           <p className="font-sans justify-center">{post.content}</p>
         </div>
       </div>
-      <div>
-        <Menu />
-      </div>
+      
     </div>
   );
 };
