@@ -14,9 +14,9 @@ const PostSchema=mongoose.Schema({
         required: true
     },
     img: {
-        type: String, // Store the image filename as a string
-        required: true,
-    },
+        type: String || null, // Store the image filename as a string
+       required: true,
+    }, 
     date:{
         type: Date,
         default: Date.now

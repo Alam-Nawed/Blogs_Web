@@ -1,26 +1,30 @@
 import React, { useState,useEffect } from "react";
 import axios from 'axios'
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
 
   const [posts, setPosts] = useState([]); 
+  const category = useLocation().search
+
   useEffect(() => {
     // Call the server to fetch the posts and store them into the state
     async function fetchData() {
       try{
-        const { data } = await axios.get('http://localhost:4000/post');
+        const { data } = await axios.get(`http://localhost:4000/post${category}`);
         setPosts(data.data.posts);
-        console.log("Posts fetched Successfulyy")
+        console.log(posts)
       }catch(err){
         console.log("Could Not get the posts")
       }
     }
     fetchData();
-  }, []);
+  }, [category]);
 
   return (
     <div className="flex-inital space-y-6 my-8">
-      {posts.map((item, id) => (
+        {posts.map((item, id) => (
         <div className="flex px-[10%] space-x-2">
           <div className="relative">
             <img
@@ -31,12 +35,12 @@ const Home = () => {
             <div className="bg-green-300 absolute top-2 -left-3 -z-10 w-2/3 h-full" />
           </div>
           <div className="flex-col px-10">
-            <div className="font-bold text-2xl">{item.title}</div>
-            <p>{item.content}</p>
-            <button className="bg-slate-200 px-1 rounded-sm">Read More...</button>
+            <Link className="font-bold text-2xl" to={`/post/${item._id}`}>{item.title}</Link>
+            <p>{item.content.substring(0,100)}</p>
           </div>
         </div>
       ))}
+      
     </div>
   );
 };

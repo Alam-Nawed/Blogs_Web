@@ -17,10 +17,10 @@ const toggleMenu=()=>{
         </Link>
         
           <ul className="md:flex items-center space-x-6 hidden">
-          <li>Art</li>
-          <li>Science</li>
-          <li>Technology</li>
-          <li>Logout</li>
+          <Link to="/?category=art">Art</Link>
+          <Link to="/?category=science">Science</Link>
+          <Link to="/?category=technology">Technology</Link>
+          <Link>Logout</Link>
           <Link to='/write' className='px-2 py-4 bg-sky-100 rounded-full'>Write</Link>
           </ul>
       </div>

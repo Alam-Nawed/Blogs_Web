@@ -7,7 +7,7 @@ import moment from "moment";
 const Write = () => {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null); // To store the selected image file
-  const [category, setCategory] = useState("science");
+  const [category, setCategory] = useState("art");
   const [value, setValue] = useState("");
 
   const upload = async () => {
@@ -74,10 +74,8 @@ const Write = () => {
           <input
             type="file"
             id="file"
-            className="hidden"
-            onChange={(e) => setFile(e.target.files[0])}
-          ></input>
-          <label htmlFor="file">Upload</label>
+            onChange={(e) => setFile(e.target.files[0])}/>
+          
           <div className="flex justify-between">
             <button className="bg-sky-400 px-2 py-1 rounded-sm text-sm">
               Save as draft

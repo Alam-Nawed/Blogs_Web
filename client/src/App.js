@@ -8,8 +8,8 @@ import Home from './pages/Home'
 import Single from './pages/Single'
 import Write from './pages/Write'
 import Footer from './Components/Footer'
-
 import { createBrowserRouter,RouterProvider,Route,Outlet } from 'react-router-dom';
+import Hello from './pages/Hello';
 
 
 const Layout = () => {
@@ -49,6 +49,10 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
+  {
+    path:"/jkl",
+    element:<Hello/>
+  }
 ]);
 
 function App() {

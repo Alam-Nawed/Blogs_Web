@@ -2,10 +2,16 @@ const Post = require("../models/PostSchema");
 const cheerio = require("cheerio");
 
 const getPosts = async (req, res) => {
-  const posts = await Post.find().sort(`date`);
+  let query = {};
+  if (req.query.category) {
+    // Check if a 'category' query parameter is present
+    query.category = req.query.category; // Set the category filter in the query
+  }
+  const posts = await Post.find(query).sort('date');
+
   return res.status(200).json({
     statusCode: 200,
-    message: "Fetched all posts",
+    message: "Fetched posts",
     data: { posts },
   });
 };
@@ -50,21 +56,4 @@ const addPost = async (req, res) => {
   }
 };
 
-const updatePost = async (req, res) => {
-  const { title, content, image, category, date } = req.body;
-
-  const post = await Post.findByIdAndUpdate(req.params, {
-    title,
-    content,
-    image,
-    category,
-    date,
-  });
-  return res.status(200).json({
-    statusCode: 200,
-    message: "Updated post",
-    data: { post },
-  });
-};
-
-module.exports = { getPost, getPosts, deletePost, addPost, updatePost };
+module.exports = { getPost, getPosts, deletePost, addPost };
