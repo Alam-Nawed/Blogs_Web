@@ -55,13 +55,13 @@ const Write = () => {
               theme="snow"
               value={value}
               onChange={setValue}
-              className="h-[200%]"
+              className="h-[300px]"
               required
             />
           </div>
         </div>
         <div className="flex flex-col space-y-3 w-[30%]">
-          <div className="flex flex-col space-y-1 border-[1.5px] border-slate-300 p-2">
+          <div className="flex flex-col space-y-1 border-[1.5px] border-slate-300 p-4">
             <h1 className="text-2xl font-extrabold">Publish</h1>
             <span>
               {" "}
@@ -87,7 +87,7 @@ const Write = () => {
               </button>
             </div>
           </div>
-          <div className="flex flex-col border-[1.5px] border-slate-300 p-2">
+          <div className="flex flex-col border-[1.5px] border-slate-300 p-5">
             <h1 className="text-2xl font-extrabold">Category</h1>
             <div>
               <input

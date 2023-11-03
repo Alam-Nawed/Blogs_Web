@@ -1,4 +1,6 @@
 const User = require("../models/UserSchema");
+const jwt = require('jsonwebtoken');
+
 
 // Controller function for user registration
 const registerUser = async (req, res) => {
@@ -34,22 +36,34 @@ const loginUser = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(401).json({ error: "No User Exists" });
+      return res.status(200).json({ error: "No User Exists" });
     }
 
-    const passwordMatch = (password===user.password) ?true:false
+    const passwordMatch = (password===user.password) ? true:false
 
     if (!passwordMatch) {
-      return res.status(401).json({ error: "Invalid username or password" });
+      return res.status(200).json({ error: "Invalid username or password" });
     }
 
-    // You can use tokens, sessions, or cookies for user authentication after successful login
-    // For simplicity, I'll send a success message here
-    res.json({ message: "Login successful" });
+    const tokenPayload = {
+      email: user.email,
+    };
+    //console.log(user.email)
+    
+    const accessToken = jwt.sign(tokenPayload, 'SECRET');
+
+    res.json({
+      status: 'success',
+      message: 'User Logged In!',
+      data: {
+        accessToken,
+      },
+    });
+    
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Login failed" });
   }
 };
 
-module.exports={loginUser,registerUser}
+module.exports={loginUser,registerUser} 
