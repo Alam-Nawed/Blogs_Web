@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { BsPencilFill } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
@@ -7,11 +7,15 @@ import { Menu } from "../Components/Menu";
 import axios from "axios";
 import moment from "moment";
 import image2 from "../images/hello.jpeg";
+import UserContext from "../context/UserContext";
+
 
 const Single = () => {
   const { id: postId } = useParams();
   const [post, setPost] = useState({});
   const [file, setFile] = useState(null); // To store the selected image file
+  const {authToken}=useContext(UserContext)
+  
 
   const navigate = useNavigate();
   // Fetch the single blog post
@@ -19,15 +23,18 @@ const Single = () => {
     async function fetchData() {
       const {data}  = await axios.get(`http://localhost:4000/post/${postId}`);
       setPost(data.data.post);
-      console.log(post.img)
+      console.log(data.data.post.title)
+      console.log(data.data.post.user?.username)
     }
     fetchData();
   }, [postId]);
 
   const deletePost = async () => {
-    await axios.delete(`http://localhost:4000/post/${postId}`);
-    navigate("/");
-  };
+    
+      await axios.delete(`http://localhost:4000/post/${postId}`);
+      navigate("/");
+      }
+  
 
   return (
     <div className="flex justify-evenly py-[5%] px-[2%]">
@@ -60,6 +67,6 @@ const Single = () => {
       
     </div>
   );
-};
+  }
 
 export default Single;

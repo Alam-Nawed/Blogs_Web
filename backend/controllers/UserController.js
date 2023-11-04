@@ -1,13 +1,11 @@
 const User = require("../models/UserSchema");
-const jwt = require('jsonwebtoken');
-
+const jwt = require("jsonwebtoken");
 
 // Controller function for user registration
 const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-
     // Check if the email already exists in the database
     const existingEmail = await User.findOne({ email });
 
@@ -39,7 +37,7 @@ const loginUser = async (req, res) => {
       return res.status(200).json({ error: "No User Exists" });
     }
 
-    const passwordMatch = (password===user.password) ? true:false
+    const passwordMatch = password === user.password ? true : false;
 
     if (!passwordMatch) {
       return res.status(200).json({ error: "Invalid username or password" });
@@ -48,22 +46,20 @@ const loginUser = async (req, res) => {
     const tokenPayload = {
       email: user.email,
     };
-    //console.log(user.email)
-    
-    const accessToken = jwt.sign(tokenPayload, 'SECRET');
+
+    const accessToken = jwt.sign(tokenPayload, "SECRET");
 
     res.json({
-      status: 'success',
-      message: 'User Logged In!',
+      status: "success",
+      message: "User Logged In!",
       data: {
         accessToken,
       },
     });
-    
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Login failed" });
   }
 };
 
-module.exports={loginUser,registerUser} 
+module.exports = { loginUser, registerUser};

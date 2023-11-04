@@ -11,6 +11,9 @@ import Footer from './Components/Footer'
 import About from './pages/About';
 import Contact from './pages/Contact';
 import { createBrowserRouter,RouterProvider,Route,Outlet } from 'react-router-dom';
+import { UserProvider } from './context/UserContext';
+import ProtectedRoute from './Components/ProtectedRoute';
+import PublicRoute from './Components/PublicRoute';
 
 
 const Layout = () => {
@@ -38,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/write",
-        element: <Write />,
+        element: (<ProtectedRoute><Write /></ProtectedRoute>),
       },
       {
         path:"/about",
@@ -52,11 +55,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <Register />,
+    element: (<PublicRoute><Register /></PublicRoute>),
   },
   {
     path: "/login",
-    element: <Login />,
+    element:(<PublicRoute><Login /></PublicRoute>) ,
   },
   
   
@@ -64,9 +67,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-      <div >
+      <UserProvider>
         <RouterProvider router={router} />
-      </div>
+      </UserProvider>
   );
 }
 

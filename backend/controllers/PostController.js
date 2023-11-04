@@ -1,5 +1,6 @@
 const Post = require("../models/PostSchema");
 const cheerio = require("cheerio");
+const User=require("../models/UserSchema")
 
 const getPosts = async (req, res) => {
   let query = {};
@@ -15,9 +16,8 @@ const getPosts = async (req, res) => {
     data: { posts },
   });
 };
-
 const getPost = async (req, res) => {
-  const post = await Post.findById(req.params.id);
+  const post = await Post.findById(req.params.id)
   return res.status(200).json({
     statusCode: 200,
     message: "Fetched post",

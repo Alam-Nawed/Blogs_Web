@@ -37,7 +37,7 @@ const Write = () => {
       console.error(err);
     }
   };
-
+  
   return (
     <form onSubmit={handleSubmit}> {/* Wrap the form fields with a form element */}
       <div className="flex px-[8%] justify-around py-[5%] space-x-4">

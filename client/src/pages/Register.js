@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Link, json } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
 
   const navigate=useNavigate()
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const [input, setInput] = useState({
     username: "",
@@ -15,24 +15,28 @@ const Register = () => {
 
   const handleChange = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value}));
+    setIsFormValid(e.target.form.checkValidity());
 
   };
 
   const handleSubmit = async(e) => {
     e.preventDefault();
+    if (!isFormValid) {
+      console.log("Please fill the form")
+    } else {
     try{
       const res=await axios.post('http://localhost:4000/user/register',input)
       navigate('/login')
       console.log(res.data)
-
     }catch(err){
       console.error(err);
     }
+  }
 
   };
 
   return (
-    <div className="flex items-center justify-center bg-sky-200 h-screen">
+    <form className="flex items-center justify-center bg-sky-200 h-screen" onClick={handleSubmit}>
       <div className="w-[50vh] shadow-md p-6 space-y-4 bg-white rounded-md">
         <div className="text-xl font-bold text-center">Registration Form</div>
         <div className="flex items-center justify-center">
@@ -68,7 +72,7 @@ const Register = () => {
         <div className="flex items-center justify-center">
           <button
             className="py-2 px-2 bg-sky-700 hover:bg-sky-800 text-white w-48"
-            onClick={handleSubmit}
+            type="submit"
           >
             Register
           </button>
@@ -80,7 +84,7 @@ const Register = () => {
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

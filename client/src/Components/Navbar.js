@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsArrowRight, BsFillPenFill } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
+import UserContext from "../context/UserContext";
 
 const Navbar = () => {
   const [toggle, settoggle] = useState(false);
+  const {authToken,logout}=useContext(UserContext);
 
   const toggleMenu = () => {
     settoggle(!toggle);
@@ -21,7 +23,7 @@ const Navbar = () => {
           <Link to="/">Home</Link>
           <Link to="/about">About Us</Link>
           <Link to="/contact">Contact Us</Link>
-          <Link to="/login">Login</Link>
+          {authToken?<span onClick={logout} className="cursor-pointer">Logout</span>:<Link to="/login">Login</Link>}
           <Link className="space-x-1" to='/write'>
             <button className="bg-gray-700 text-white rounded-md py-2 px-4 flex flex-row items-center">
               Write

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../context/UserContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const {login}=useContext(UserContext)
 
   const [input, setInput] = useState({
     email: "",
@@ -26,6 +28,8 @@ const Login = () => {
       try {
         const res=await axios.post("http://localhost:4000/user/login", input);
         console.log(res.data)
+        login(res.data.data.accessToken)
+        //login(res.data.token);
         navigate("/");
       } catch (err) {
         console.error(err);
