@@ -74,6 +74,7 @@ const Write = () => {
               type="file"
               id="file"
               onChange={(e) => setFile(e.target.files[0])}
+              required
             />
             <div className="flex justify-between">
               <button className="bg-sky-400 px-2 py-1 rounded-sm text-sm">

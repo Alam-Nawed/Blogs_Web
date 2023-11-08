@@ -22,6 +22,7 @@ const Single = () => {
   useEffect(() => {
     async function fetchData() {
       const {data}  = await axios.get(`http://localhost:4000/post/${postId}`);
+      console.log(data)
       setPost(data.data.post);
       console.log(data.data.post.title)
       console.log(data.data.post.user?.username)

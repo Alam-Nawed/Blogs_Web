@@ -18,13 +18,18 @@ const getPosts = async (req, res) => {
 };
 const getPost = async (req, res) => {
   const post = await Post.findById(req.params.id)
-  return res.status(200).json({
-    statusCode: 200,
-    message: "Fetched post",
-    data: {
-      post: post || {},
-    },
-  });
+  if(post){
+    return res.status(200).json({
+      statusCode: 200,
+      message: "Fetched post",
+      data: {
+        post: post || {},
+      },
+    });
+  }else{
+    res.status(200).json({message:"No post"})
+  }
+  
 };
 
 const deletePost = async (req, res) => {
@@ -55,5 +60,4 @@ const addPost = async (req, res) => {
     res.status(500).json({ message: "Error Creating the Post" });
   }
 };
-
 module.exports = { getPost, getPosts, deletePost, addPost };
