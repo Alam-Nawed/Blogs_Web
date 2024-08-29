@@ -9,6 +9,7 @@ const Write = () => {
   const [file, setFile] = useState(null); // To store the selected image file
   const [category, setCategory] = useState("art");
   const [value, setValue] = useState("");
+  const token = localStorage.getItem("authToken");
 
   const upload = async () => {
     try {
@@ -26,13 +27,23 @@ const Write = () => {
     const imgUrl = await upload();
     try {
       console.log(file);
-      await axios.post("http://localhost:4000/post/", {
-        title,
-        content: value,
-        category,
-        img: file ? imgUrl : "",
-        date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-      });
+      await axios.post(
+        "http://localhost:4000/post/",
+        {
+          title,
+          content: value,
+          category,
+          img: file ? imgUrl : "",
+          date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+
+          },
+        }
+      );
     } catch (err) {
       console.error(err);
     }

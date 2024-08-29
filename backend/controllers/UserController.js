@@ -43,10 +43,7 @@ const loginUser = async (req, res) => {
       return res.status(200).json({ error: "Invalid username or password" });
     }
 
-    const tokenPayload = {
-      email: user.email,
-    };
-
+    const tokenPayload = { email: user.email, _id: user._id };
     const accessToken = jwt.sign(tokenPayload, "SECRET");
 
     res.json({

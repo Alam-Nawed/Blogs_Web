@@ -43,7 +43,10 @@ const Single = () => {
             <img src={image} className="w-12" />
           </div>
           <div className="flex-col">
-            <span className="font-bold text-lg">John</span>
+            <span className="font-bold text-lg">
+              {post.author ? post.author :
+              "John"
+              }</span>
             <p className="text-sm font-serif">
               Posted {moment(post.date).fromNow()}
             </p>
