@@ -18,6 +18,7 @@ const Home = () => {
           `http://localhost:4000/post${category}`
         );
         setPosts(data.data.posts);
+        console.log(posts)
         setTimeout(() => {
           setLoading(false); // Set loading to false after a delay
         }, 1000);
@@ -38,15 +39,15 @@ const Home = () => {
         <div className="flex-inital space-y-20 py-8 px-[10%] bg-slate-200">
           <div>
             {posts.length > 0 && (
-              <div className="flex space-x-1 items-center justify-center">
+              <div className="flex flex-col md:flex-row space-x-1 items-center justify-center">
                 <img
                   src={posts[0].img}
-                  className="w-3/6 object-cover scale-100"
+                  className="w-3/6 object-cover scale-100 rounded-md"
                   alt={posts[0].title}
                 />
 
                 <div className="flex-col px-10 space-y-4">
-                  <div className="flex items-center space-x-2 ">
+                  <div className="flex items-center space-x-2 justify-center md:justify-start">
                     <p className="text-sm font-serif">
                       Posted {moment(posts[0].date).fromNow()}
                     </p>
@@ -58,14 +59,14 @@ const Home = () => {
                     <Link to={`/post/${posts[0]._id}`}>{posts[0].title}</Link>
                   </div>
 
-                  <p>{posts[0].content.substring(0, 300)}....</p>
+                  <p className="text-center md:text-start">{posts[0].content.substring(0, 300)}....</p>
                 </div>
               </div>
             )}
           </div>
           <div className="flex flex-col gap-4">
             <p className="text-2xl font-bold">Popular Categories</p>
-            <div className="flex justify-between text-white font-bold">
+            <div className="flex flex-wrap justify-between text-white font-bold ">
               <Link to="/?category=art">
                 <button className="bg-rose-400 px-8 py-2 rounded-md">
                   Art
@@ -93,13 +94,13 @@ const Home = () => {
               </Link>
             </div>
           </div>
-          <div className="">
-            {posts.slice(1).map((item, id) => (
+          <div >
+            {posts? posts.slice(1).map((item, id) => (
               <div
                 className="flex space-x-2 justify-start items-center"
                 key={id}
               >
-                <img src={item.img} className="w-1/3 scale-[85%]" />
+                <img src={item.img} className="w-1/3 scale-[85%] rounded-md" />
                 <div className="space-y-2">
                   <div className="flex items-center space-x-2 ">
                     <p className="text-sm font-serif">
@@ -117,7 +118,9 @@ const Home = () => {
                   </p>
                 </div>
               </div>
-            ))}
+            )):
+            <p>No Posts to Show</p>
+            }
           </div>
         </div>
       )}

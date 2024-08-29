@@ -14,7 +14,6 @@ const Single = () => {
   const { id: postId } = useParams();
   const [post, setPost] = useState({});
   const [file, setFile] = useState(null); // To store the selected image file
-  const {authToken}=useContext(UserContext)
   
 
   const navigate = useNavigate();
@@ -24,8 +23,6 @@ const Single = () => {
       const {data}  = await axios.get(`http://localhost:4000/post/${postId}`);
       console.log(data)
       setPost(data.data.post);
-      console.log(data.data.post.title)
-      console.log(data.data.post.user?.username)
     }
     fetchData();
   }, [postId]);
@@ -40,7 +37,7 @@ const Single = () => {
   return (
     <div className="flex justify-evenly py-[5%] px-[2%]">
       <div className="flex-col space-y-4">
-        <img src={post.img} className="w-11/12" />
+        <img src={`/${post.img}`} className="w-3/6 rounded-md" />
         <div className="flex items-center space-x-2">
           <div>
             <img src={image} className="w-12" />

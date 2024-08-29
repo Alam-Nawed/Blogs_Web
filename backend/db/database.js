@@ -12,4 +12,4 @@ console.log('Connected to MongoDB successfully')
 }
 }
 
-module.exports=connectDB
+module.exports = connectDB

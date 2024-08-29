@@ -5,24 +5,23 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import UserContext from "../context/UserContext";
 
 const Navbar = () => {
-  const [toggle, settoggle] = useState(false);
-  const {authToken,logout}=useContext(UserContext);
+  const [toggle, setToggle] = useState(false);
+  const { authToken, logout } = useContext(UserContext);
 
   const toggleMenu = () => {
-    settoggle(!toggle);
+    setToggle(!toggle);
   };
 
   return (
-    <div className="bg-gray-900 sticky z-10 w-full top-0 left-0 text-white">
-      <div className="relative md:flex justify-between py-4 items-center px-4">
+    <div className="bg-gray-900 sticky top-0 left-0 w-full z-10 text-white">
+      <div className="relative md:flex justify-between items-center px-4 py-2">
         <div>
           <Link to="/">
-            <span className="text-lg font-extrabold ">Bloggo</span>
+            <span className="text-lg font-extrabold">Bloggo</span>
           </Link>
         </div>
 
         <ul className="md:flex items-center space-x-6 hidden">
-          <Link to="/">Home</Link>
           <Link to="/about">About Us</Link>
           <Link to="/contact">Contact Us</Link>
           {authToken ? (
@@ -33,33 +32,45 @@ const Navbar = () => {
             <Link to="/login">Login</Link>
           )}
           <Link className="space-x-1" to="/write">
-            <button className="bg-gray-700 text-white rounded-md py-2 px-4 flex flex-row items-center">
+            <button className="bg-gray-700 text-white rounded-md py-2 px-4 flex items-center">
               Write
-              <BsFillPenFill />
+              <BsFillPenFill className="ml-1" />
             </button>
           </Link>
         </ul>
 
         <ul
-          className={`absolute md:hidden top-[61px] left-0 w-full h-[32vh] items-center bg-white space-y-4 justify-center transform ${
-            toggle ? "block" : "hidden"
-          }`}
+          className={`absolute md:hidden bg-slate-200 text-black w-full h-screen top-0 left-0 flex flex-col items-center justify-center z-50 text-4xl space-y-8 transform mt-11 ${
+            toggle ? "block translate-x-0" : "hidden translate-x-full"
+          } transition-transform duration-300`}
         >
-          <Link className="flex items-center justify-center">Interview</Link>
-          <Link className="flex items-center justify-center">Blog</Link>
-          <Link className="flex items-center justify-center">Graveyard</Link>
-          <Link className="flex items-center justify-center">Products</Link>
-          <div className="flex items-center justify-center">
-            <button className="bg-black text-white rounded-md py-2 px-4 flex items-center justify-center">
-              Subscribe
-              <BsArrowRight />
+          <Link to="/about" className="flex items-center justify-center">
+            About Us
+          </Link>
+          <Link to="/contact" className="flex items-center justify-center">
+            Contact Us
+          </Link>
+          {authToken ? (
+            <span onClick={logout} className="cursor-pointer">
+              Logout
+            </span>
+          ) : (
+            <Link to="/login" className="flex items-center justify-center">
+              Login
+            </Link>
+          )}
+          <Link className="space-x-1 " to="/write">
+            <button className="bg-gray-700 text-white rounded-md py-2 px-4 flex items-center">
+              Write
+              <BsFillPenFill className="ml-1" />
             </button>
-          </div>
+          </Link>
         </ul>
 
         <GiHamburgerMenu
-          className="absolute cursor-pointer block md:hidden right-8 top-6 scale-110"
+          className="absolute cursor-pointer block md:hidden right-4 top-4 scale-110"
           onClick={toggleMenu}
+          aria-label="Toggle menu"
         />
       </div>
       <hr className="border-black" />
