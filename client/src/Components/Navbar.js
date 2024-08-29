@@ -16,15 +16,23 @@ const Navbar = () => {
     <div className="bg-gray-900 sticky z-10 w-full top-0 left-0 text-white">
       <div className="relative md:flex justify-between py-4 items-center px-4">
         <div>
-          <span className="text-lg font-extrabold ">Bloggo</span>
+          <Link to="/">
+            <span className="text-lg font-extrabold ">Bloggo</span>
+          </Link>
         </div>
 
         <ul className="md:flex items-center space-x-6 hidden">
           <Link to="/">Home</Link>
           <Link to="/about">About Us</Link>
           <Link to="/contact">Contact Us</Link>
-          {authToken?<span onClick={logout} className="cursor-pointer">Logout</span>:<Link to="/login">Login</Link>}
-          <Link className="space-x-1" to='/write'>
+          {authToken ? (
+            <span onClick={logout} className="cursor-pointer">
+              Logout
+            </span>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
+          <Link className="space-x-1" to="/write">
             <button className="bg-gray-700 text-white rounded-md py-2 px-4 flex flex-row items-center">
               Write
               <BsFillPenFill />

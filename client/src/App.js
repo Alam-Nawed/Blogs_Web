@@ -18,11 +18,13 @@ import PublicRoute from './Components/PublicRoute';
 
 const Layout = () => {
   return (
-    <>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
-      <Outlet />
+      <div className="flex-grow">
+        <Outlet />
+      </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
