@@ -1,5 +1,5 @@
 import React from "react";
-import image from "../images/hello.jpeg";
+import image from "../images/hello.jpg";
 import { Link } from "react-router-dom";
 
 const About = () => {

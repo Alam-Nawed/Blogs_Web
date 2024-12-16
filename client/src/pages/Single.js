@@ -6,7 +6,7 @@ import image from "../profile.jpeg";
 import { Menu } from "../Components/Menu";
 import axios from "axios";
 import moment from "moment";
-import image2 from "../images/hello.jpeg";
+import image2 from "../images/hello.jpg";
 import UserContext from "../context/UserContext";
 
 

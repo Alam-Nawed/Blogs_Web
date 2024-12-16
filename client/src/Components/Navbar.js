@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="relative md:flex justify-between items-center px-4 py-2">
         <div>
           <Link to="/">
-            <span className="text-lg font-extrabold">Bloggo</span>
+            <span className="text-lg font-extrabold">Blog Website</span>
           </Link>
         </div>
 
